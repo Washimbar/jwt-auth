@@ -2,15 +2,14 @@ const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const connectDB = require("./src/db/connectionDB");
+const userRoute = require("./src/routes/userRoute");
 dotenv.config();
 const PORT = process.env.PORT;
 const app = express();
 
-app.use("/", (req, res) => {
-	res.status(200).json({
-		message: "server established",
-	});
-});
+app.use(express.json());
+
+app.use("/user", userRoute);
 
 const start = async () => {
 	try {
